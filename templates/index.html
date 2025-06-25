@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Legal Case Manager</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background-color: #f9f9f9;
+        }
+
+        h1, h2 {
+            color: #2c3e50;
+        }
+
+        form {
+            background: #ffffff;
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        form input,
+        form textarea,
+        form select,
+        form button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        form button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .form-section {
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🧑‍⚖️ Legal Case Management System</h1>
+
+    <div class="form-section">
+        <h2>Add New Case</h2>
+        <form action="/add_case" method="post">
+            <input type="text" name="title" placeholder="Case Title" required>
+            <textarea name="description" placeholder="Description" rows="4"></textarea>
+            <label for="client_id">Client:</label>
+            <select name="client_id" required>
+                {% for client in clients %}
+                    <option value="{{ client.id }}">{{ client.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="lawyer_id">Lawyer:</label>
+            <select name="lawyer_id" required>
+                {% for lawyer in lawyers %}
+                    <option value="{{ lawyer.id }}">{{ lawyer.name }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Add Case</button>
+        </form>
+    </div>
+
+    <div class="form-section">
+        <h2>Add Client</h2>
+        <form action="/add_client" method="post">
+            <input type="text" name="name" placeholder="Client Name" required>
+            <input type="text" name="contact" placeholder="Contact Info">
+            <button type="submit">Add Client</button>
+        </form>
+    </div>
+
+    <div class="form-section">
+        <h2>Add Lawyer</h2>
+        <form action="/add_lawyer" method="post">
+            <input type="text" name="name" placeholder="Lawyer Name" required>
+            <input type="text" name="specialization" placeholder="Specialization">
+            <button type="submit">Add Lawyer</button>
+        </form>
+    </div>
+
+    <div>
+        <h2>All Cases</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Case Title</th>
+                    <th>Status</th>
+                    <th>Client</th>
+                    <th>Lawyer</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for case in cases %}
+                <tr>
+                    <td>{{ case.title }}</td>
+                    <td>{{ case.status }}</td>
+                    <td>{{ case.client.name }}</td>
+                    <td>{{ case.lawyer.name }}</td>
+                    <td>{{ case.description }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
