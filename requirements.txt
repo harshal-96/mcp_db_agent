@@ -7,3 +7,4 @@ sqlalchemy
 gradio
 mcp
 db-sqlite3
+lama-index-llms-google-genai
