@@ -24,6 +24,16 @@ dotenv.load_dotenv()
 api_key = os.getenv("OPEN_AI_API_KEY")
 llm = OpenAI(model="gpt-4o", api_key=api_key)
 
+
+# api_key = os.getenv("GOOGLE_API_KEY")
+
+
+# llm = GoogleGenAI(
+#     model="gemini-2.0-flash",
+#     api_key=api_key # uses GOOGLE_API_KEY env var by default
+# )
+
+
 SYSTEM_PROMPT = """\
 You are LegalMind AI, an advanced AI assistant specialized in Legal Database Management.
 
